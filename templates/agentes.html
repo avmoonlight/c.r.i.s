@@ -18,6 +18,7 @@
                 <li class="nav-item"><a class="nav-link active" href="{{ url_for('agentes') }}">Agentes</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('criaturas') }}">Bestiário</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('itens') }}">Itens Paranormais</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a></li>
             </ul>
         </div>
     </div>
@@ -25,6 +26,57 @@
 
 <div class="container py-5">
     <h1 class="text-center mb-5">Agentes</h1>
+
+    <div class="card p-4 mb-5 bg-secondary text-light">
+        <h4 class="mb-4">Cadastrar Novo Agente</h4>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="sobrenome" class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" id="sobrenome" name="sobrenome">
+                </div>
+                <div class="col-md-6">
+                    <label for="data_nasc" class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="data_nasc" name="data_nasc">
+                </div>
+                <div class="col-md-6">
+                    <label for="contato_emergencia" class="form-label">Contato de Emergência</label>
+                    <input type="text" class="form-control" id="contato_emergencia" name="contato_emergencia">
+                </div>
+                <div class="col-md-6">
+                    <label for="elemento" class="form-label">Elemento</label>
+                    <input type="text" class="form-control" id="elemento" name="elemento">
+                </div>
+                <div class="col-md-6">
+                    <label for="classe" class="form-label">Classe</label>
+                    <input type="text" class="form-control" id="classe" name="classe">
+                </div>
+                <div class="col-12">
+                    <label for="observacoes" class="form-label">Observações</label>
+                    <textarea class="form-control" id="observacoes" name="observacoes" rows="2"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="vivo">Vivo</option>
+                        <option value="morto">Morto</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="imagem" class="form-label">Imagem</label>
+                    <input type="file" class="form-control" id="imagem" name="imagem">
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-primary px-5">Cadastrar Agente</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div class="row g-4">
         {% for agente in agentes %}
         <div class="col-md-4">
@@ -66,5 +118,3 @@
 </body>
 </html>
 
-
-<!-- Versões para CRIATURAS e ITENS serão semelhantes, mudando a variável para criaturas/itens -->

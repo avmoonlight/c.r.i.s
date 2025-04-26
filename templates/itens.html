@@ -18,6 +18,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('agentes') }}">Agentes</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('criaturas') }}">Bestiário</a></li>
                 <li class="nav-item"><a class="nav-link active" href="{{ url_for('itens') }}">Itens Paranormais</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a></li>
             </ul>
         </div>
     </div>
@@ -25,6 +26,39 @@
 
 <div class="container py-5">
     <h1 class="text-center mb-5">Itens Paranormais</h1>
+
+    <div class="card p-4 mb-5 bg-secondary text-light">
+        <h4 class="mb-4">Cadastrar Novo Item Paranormal</h4>
+        <form method="POST">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="elemento" class="form-label">Elemento</label>
+                    <input type="text" class="form-control" id="elemento" name="elemento">
+                </div>
+                <div class="col-md-6">
+                    <label for="raridade" class="form-label">Raridade</label>
+                    <select class="form-select" id="raridade" name="raridade">
+                        <option value="comum">Comum</option>
+                        <option value="rara">Rara</option>
+                        <option value="muito rara">Muito Rara</option>
+                        <option value="relíquia">Relíquia</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="efeito" class="form-label">Efeito</label>
+                    <input type="text" class="form-control" id="efeito" name="efeito">
+                </div>
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-primary px-5">Cadastrar Item</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <div class="row g-4">
         {% for item in itens %}
         <div class="col-md-4">
