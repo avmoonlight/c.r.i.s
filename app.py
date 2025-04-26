@@ -370,6 +370,14 @@ def deletar_item(id):
     conn.close()
     return render_template('confirmar_deletar_item.html', item=item)
 
+# Página Atividade Paranormal
+@app.route('/atividade-paranormal')
+def atividade_paranormal():
+    if 'usuario' not in session:
+        return redirect(url_for('login'))
+    return render_template('atividade_paranormal.html')
+
+
 
 # Logout
 @app.route('/logout')
