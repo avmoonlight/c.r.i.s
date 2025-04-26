@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex">
+        <div class="sidebar bg-primary text-light d-flex flex-column align-items-center p-3">
+            <i class="bi bi-person-circle fs-1 mb-3"></i>
+            <h6>SUPERUSER</h6>
+            <hr class="text-light w-75">
+            <i class="bi bi-people-fill fs-1 mb-3"></i>
+            <h6>USUÁRIOS</h6>
+        </div>
+
+        <div class="main-content flex-grow-1 p-4">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="card card-banner">
+                        <img src="{{ url_for('static', filename='img/banner.jpg') }}" class="card-img" alt="Banner">
+                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                            <h1 class="fw-bold">DASHBOARD</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4 bg-light text-dark h-100">
+                        <p class="text-center fw-bold">GRÁFICO (FEITO COM A BIBLIOTECA DO JS).<br>QUANTOS PORCENTO DA MEMBRANA MUNDIAL ESTÁ ENFRAQUECIDA</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4 bg-primary text-light h-100">
+                        <p class="text-center">A membrana próxima a ordem está estável</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card p-4 text-light h-100 bg-ameaca">
+                        <p class="text-center fw-bold">SEM AMEAÇA DE ATAQUE A BASE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
