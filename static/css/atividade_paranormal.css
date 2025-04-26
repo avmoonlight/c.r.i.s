@@ -7,7 +7,7 @@ body, html {
 }
 
 .navbar {
-    background-color: #004d40;
+    background-color: #776067;
     padding: 1rem 2rem;
 }
 
@@ -28,7 +28,7 @@ body, html {
 
 .navbar li a:hover,
 .navbar li a.active {
-    color: #00e5ff;
+    color: #f8bbd0;
 }
 
 .container {
@@ -42,11 +42,11 @@ body, html {
     border-radius: 10px;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+    box-shadow: 0 0 10px rgba(119, 96, 103, 0.4);
 }
 
 .card h2 {
-    color: #00e5ff;
+    color: #f8bbd0;
     margin-bottom: 1rem;
 }
 
@@ -58,7 +58,7 @@ canvas {
 
 /* Parallax */
 .parallax {
-    background-image: url("../img/img_paralax.jpg"); /* substitua se necessário */
+    background-image: url("../img/img_paralax.jpg");
     min-height: 300px;
     background-attachment: fixed;
     background-position: center;
@@ -69,14 +69,14 @@ canvas {
 
 /* Tabela */
 .table-dark {
-    background-color: #263a3a;
-    color: #e0f7fa;
+    background-color: #3b2f32;
+    color: #f3e6e8;
 }
 
 .table-dark th {
-    color: #80cbc4;
+    color: #d1b7bd;
 }
 
 .table-dark tr:hover {
-    background-color: #345a5a;
+    background-color: #4a3a3e;
 }
