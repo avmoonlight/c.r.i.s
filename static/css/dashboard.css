@@ -1,0 +1,67 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar {
+    width: 80px;
+    min-height: 100vh;
+    background-color: #1b2a49;
+}
+
+.sidebar h6 {
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.main-content {
+    background-color: #33353a;
+    min-height: 100vh;
+}
+
+.card-banner {
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-banner img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: brightness(60%);
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    margin: 0;
+}
+
+h1 {
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+/* Fundo específico para o card da ameaça */
+.bg-ameaca {
+    background: url("../img/ameaca.jpg") center/cover no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+
+    .sidebar h6 {
+        display: none;
+    }
+}
