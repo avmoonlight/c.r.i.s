@@ -58,7 +58,7 @@ canvas {
 
 /* Parallax */
 .parallax {
-    background-image: url("../img/parallax_bg.jpg"); /* substitua se necessário */
+    background-image: url("../img/img_paralax.jpg"); /* substitua se necessário */
     min-height: 300px;
     background-attachment: fixed;
     background-position: center;
