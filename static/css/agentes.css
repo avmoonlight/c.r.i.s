@@ -1,0 +1,73 @@
+body {
+    background-color: #121212;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.parallax-bg {
+    background-image: url("../img/bg.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: bold;
+    color: #fff;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+.card-body {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+}
+
+.btn {
+    width: 100%;
+}
+
+.navbar {
+    margin-bottom: 30px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #222;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.modal-footer .btn-danger {
+    background-color: #dc3545;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+}
