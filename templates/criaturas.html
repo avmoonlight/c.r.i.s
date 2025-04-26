@@ -1,0 +1,68 @@
+<!-- Template para CRIATURAS -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestiário</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">C.R.I.S</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('agentes') }}">Agentes</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('criaturas') }}">Bestiário</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('itens') }}">Itens Paranormais</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <h1 class="text-center mb-5">Bestiário</h1>
+    <div class="row g-4">
+        {% for criatura in criaturas %}
+        <div class="col-md-4">
+            <div class="card bg-secondary text-light">
+                <img src="{{ url_for('static', filename=criatura.imagem or 'uploads/default.jpg') }}" class="card-img-top" alt="Imagem da Criatura">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ criatura.nome }}</h5>
+                    <p class="card-text">Elemento: {{ criatura.elemento }}<br>Raridade: {{ criatura.raridade }}</p>
+                    <a href="{{ url_for('editar_criatura', id=criatura.id) }}" class="btn btn-primary mb-2">Editar</a>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletarModal{{ criatura.id }}">Deletar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Deletar -->
+        <div class="modal fade" id="deletarModal{{ criatura.id }}" tabindex="-1" aria-labelledby="deletarModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirmar Deleção</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+              </div>
+              <div class="modal-body">
+                Tem certeza que deseja deletar esta criatura?
+              </div>
+              <div class="modal-footer">
+                <form method="POST" action="{{ url_for('deletar_criatura', id=criatura.id) }}">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Deletar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
