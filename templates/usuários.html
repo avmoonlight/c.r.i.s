@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuários Cadastrados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/usuarios.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="d-flex">
+        <div class="sidebar bg-primary text-light d-flex flex-column align-items-center p-3">
+            <i class="bi bi-person-circle fs-1 mb-3"></i>
+            <h6>SUPERUSER</h6>
+            <hr class="text-light w-75">
+            <i class="bi bi-people-fill fs-1 mb-3"></i>
+            <h6>USUÁRIOS</h6>
+        </div>
+
+        <div class="main-content flex-grow-1 p-4">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="card card-banner">
+                        <img src="{{ url_for('static', filename='img/banner_usuarios.jpg') }}" class="card-img" alt="Banner Usuários">
+                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                            <h1 class="fw-bold">Usuários cadastrados</h1>
+                        </div>
+                    </div>
+                </div>
+
+                {% for usuario in usuarios %}
+                <div class="col-md-4">
+                    <div class="card bg-secondary text-light text-center">
+                        <img src="{{ url_for('static', filename=usuario.imagem or 'uploads/default-user.png') }}" class="card-img-top" alt="Imagem do Usuário">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ usuario.username }}</h5>
+                            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#editarModal{{ usuario.id }}">Editar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal Editar -->
+                <div class="modal fade" id="editarModal{{ usuario.id }}" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Confirmar Edição</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                      </div>
+                      <div class="modal-body">
+                        Você deseja editar este usuário?
+                      </div>
+                      <div class="modal-footer">
+                        <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="btn btn-primary">Sim, Editar</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+                <!-- Formulário para criar novo usuário -->
+                <div class="col-12 mt-5">
+                    <div class="card p-4 bg-light text-dark">
+                        <h4 class="text-center mb-4">Formulário de criação de novo usuário</h4>
+                        <form method="POST" enctype="multipart/form-data" action="{{ url_for('usuarios') }}">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Nome de usuário</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" name="senha" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="imagem" class="form-label">Imagem do usuário</label>
+                                <input type="file" class="form-control" id="imagem" name="imagem">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-success">Cadastrar Usuário</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
