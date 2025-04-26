@@ -3,47 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Item Paranormal</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_usuario.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="profile-section">
-                <div class="avatar-wrapper">
-                    {{% if item.imagem %}}
-                        <img src="{{ url_for('static', filename=item.imagem) }}" alt="Avatar" class="avatar">
-                    {{% else %}}
-                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="avatar">
-                    {{% endif %}}
-                    <input type="file" name="imagem" id="imagem" class="file-input" form="form-editar">
-                </div>
-
-                <div class="info-section">
-                    <form method="POST" enctype="multipart/form-data" id="form-editar">
-                        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" value="{{ item.nome }}" required>
-        </div>
-<div class="form-group">
-            <label for="elemento">Elemento:</label>
-            <input type="text" id="elemento" name="elemento" value="{{ item.elemento }}" required>
-        </div>
-<div class="form-group">
-            <label for="efeito">Efeito:</label>
-            <input type="text" id="efeito" name="efeito" value="{{ item.efeito }}" required>
-        </div>
-<div class="form-group">
-            <label for="raridade">Raridade:</label>
-            <input type="text" id="raridade" name="raridade" value="{{ item.raridade }}" required>
-        </div>
-                        <div class="form-buttons">
-                            <button type="submit" class="btn">Salvar Alterações</button>
-                            <a href="{{ url_for('items') }}" class="btn btn-secondary">Cancelar</a>
-                        </div>
-                    </form>
-                </div>
+    <div class="container my-5">
+        <div class="card shadow-lg p-4 bg-dark text-light rounded">
+            <div class="text-center mb-4">
+                <h2>Editar Item Paranormal</h2>
             </div>
+            <form method="POST" enctype="multipart/form-data" id="form-editar">
+                <div class="mb-3 text-center">
+                    {% if item.imagem %}
+                        <img src="{{ url_for('static', filename=item.imagem) }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
+                    {% endif %}
+                </div>
+                <div class="mb-3">
+                    <input type="file" name="imagem" id="imagem" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{ item.nome }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="elemento" class="form-label">Elemento:</label>
+                    <input type="text" class="form-control" id="elemento" name="elemento" value="{{ item.elemento }}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="efeito" class="form-label">Efeito:</label>
+                    <input type="text" class="form-control" id="efeito" name="efeito" value="{{ item.efeito }}" required>
+                </div>
+                <div class="mb-4">
+                    <label for="raridade" class="form-label">Raridade:</label>
+                    <input type="text" class="form-control" id="raridade" name="raridade" value="{{ item.raridade }}" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary px-5">Salvar Alterações</button>
+                    <a href="{{ url_for('itens') }}" class="btn btn-secondary ms-3">Cancelar</a>
+                </div>
+            </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
