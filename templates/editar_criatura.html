@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Criatura</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_usuario.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="profile-section">
+                <div class="avatar-wrapper">
+                    {{% if criatura.imagem %}}
+                        <img src="{{ url_for('static', filename=criatura.imagem) }}" alt="Avatar" class="avatar">
+                    {{% else %}}
+                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="avatar">
+                    {{% endif %}}
+                    <input type="file" name="imagem" id="imagem" class="file-input" form="form-editar">
+                </div>
+
+                <div class="info-section">
+                    <form method="POST" enctype="multipart/form-data" id="form-editar">
+                        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ criatura.nome }}" required>
+        </div>
+<div class="form-group">
+            <label for="elemento">Elemento:</label>
+            <input type="text" id="elemento" name="elemento" value="{{ criatura.elemento }}" required>
+        </div>
+<div class="form-group">
+            <label for="raridade">Raridade:</label>
+            <input type="text" id="raridade" name="raridade" value="{{ criatura.raridade }}" required>
+        </div>
+                        <div class="form-buttons">
+                            <button type="submit" class="btn">Salvar Alterações</button>
+                            <a href="{{ url_for('criaturas') }}" class="btn btn-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
