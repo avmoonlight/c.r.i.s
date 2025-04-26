@@ -7,6 +7,26 @@
     <title>Agentes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/agentes.css') }}" rel="stylesheet">
+    <style>
+        .card-img-top.rounded-avatar {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #00e5ff;
+            background-color: #0e1a1a;
+            margin: 0 auto 1rem auto;
+            display: block;
+            position: relative;
+            top: -40px;
+        }
+        .card-body h5 {
+            margin-top: 0.5rem;
+        }
+        .card {
+            transition: none !important;
+        }
+    </style>
 </head>
 <body class="bg-dark text-light">
 
@@ -80,10 +100,15 @@
     <div class="row g-4">
         {% for agente in agentes %}
         <div class="col-md-4">
-            <div class="card bg-secondary text-light">
-                <img src="{{ url_for('static', filename=agente.imagem or 'uploads/default.jpg') }}" class="card-img-top" alt="Imagem do Agente">
-                <div class="card-body text-center">
+            <div class="card bg-secondary text-light text-center p-3">
+                <img src="{{ url_for('static', filename=agente.imagem or 'uploads/default.jpg') }}" class="card-img-top rounded-avatar" alt="Imagem do Agente">
+                <div class="card-body">
                     <h5 class="card-title">{{ agente.nome }} {{ agente.sobrenome }}</h5>
+                    <p class="card-text">
+                        Elemento: {{ agente.elemento }}<br>
+                        Classe: {{ agente.classe }}<br>
+                        Status: {{ agente.status }}
+                    </p>
                     <a href="{{ url_for('editar', id=agente.id) }}" class="btn btn-primary mb-2">Editar</a>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletarModal{{ agente.id }}">Deletar</button>
                 </div>
@@ -117,4 +142,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
