@@ -15,7 +15,7 @@ body, html {
 .sidebar h6 {
     font-size: 0.75rem;
     text-align: center;
-    color: #a7ffeb;
+    color: #1e4038;
 }
 
 .main-content {
@@ -38,12 +38,13 @@ body, html {
 }
 
 .card-banner h1 {
-    color: #e0f7fa;
+    color: #2f4b4f;
     text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
 }
 
 .card {
     border-radius: 15px;
+    background-color: #263a3a;
     box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
     transition: transform 0.2s ease;
 }
@@ -70,7 +71,7 @@ body, html {
 }
 
 form label {
-    color: #e0f7fa;
+    color: #283a3c;
 }
 
 form .form-control {

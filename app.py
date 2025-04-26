@@ -16,7 +16,7 @@ def get_db_connection():
         host='localhost',
         user='root',
         password='',
-        database='agentes_db',
+        database='ordorealitas_db',
         cursorclass=pymysql.cursors.DictCursor
     )
 

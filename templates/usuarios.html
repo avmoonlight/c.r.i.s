@@ -13,28 +13,53 @@
             <i class="bi bi-person-circle fs-1 mb-3"></i>
             <h6>SUPERUSER</h6>
             <hr class="text-light w-75">
-            <i class="bi bi-people-fill fs-1 mb-3"></i>
-            <h6>USUÁRIOS</h6>
+            <a href="{{ url_for('usuarios') }}" class="text-light text-decoration-none text-center">
+                <i class="bi bi-people-fill fs-1 mb-1"></i>
+                <h6>USUÁRIOS</h6>
+            </a>
         </div>
 
         <div class="main-content flex-grow-1 p-4">
             <div class="row g-3">
                 <div class="col-12">
-                    <div class="card card-banner">
+                    <div class="card p-4 mb-4 shadow-sm">
+                        <h4 class="text-center mb-4">Formulário de Criação de Novo Usuário</h4>
+                        <form method="POST" enctype="multipart/form-data" action="{{ url_for('usuarios') }}" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Nome de Usuário</label>
+                                <input type="text" class="form-control rounded-pill" id="username" name="username" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control rounded-pill" id="senha" name="senha" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="imagem" class="form-label">Imagem do Usuário</label>
+                                <input type="file" class="form-control rounded-pill" id="imagem" name="imagem">
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary px-5 rounded-pill">Cadastrar Usuário</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card card-banner mb-4">
                         <img src="{{ url_for('static', filename='img/img_paralax.jpg') }}" class="card-img" alt="Banner Usuários">
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">
-                            <h1 class="fw-bold">Usuários cadastrados</h1>
+                            <h1 class="fw-bold">Usuários Cadastrados</h1>
                         </div>
                     </div>
                 </div>
 
                 {% for usuario in usuarios %}
                 <div class="col-md-4">
-                    <div class="card bg-secondary text-light text-center">
+                    <div class="card bg-secondary text-light text-center mb-4">
                         <img src="{{ url_for('static', filename=usuario.imagem or 'uploads/default-user.png') }}" class="card-img-top" alt="Imagem do Usuário">
                         <div class="card-body">
                             <h5 class="card-title">{{ usuario.username }}</h5>
-                            <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#editarModal{{ usuario.id }}">Editar</button>
+                            <button class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#editarModal{{ usuario.id }}">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -58,30 +83,6 @@
                   </div>
                 </div>
                 {% endfor %}
-
-                <!-- Formulário para criar novo usuário -->
-                <div class="col-12 mt-5">
-                    <div class="card p-4 bg-light text-dark">
-                        <h4 class="text-center mb-4">Formulário de criação de novo usuário</h4>
-                        <form method="POST" enctype="multipart/form-data" action="{{ url_for('usuarios') }}">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Nome de usuário</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="imagem" class="form-label">Imagem do usuário</label>
-                                <input type="file" class="form-control" id="imagem" name="imagem">
-                            </div>
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-success">Cadastrar Usuário</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
             </div>
         </div>
