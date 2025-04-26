@@ -1,0 +1,63 @@
+body {
+    background-color: #1d1b2f;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.card-body {
+    background-color: rgba(33, 30, 60, 0.8);
+}
+
+.navbar {
+    background-color: #322f51 !important;
+}
+
+.btn-primary {
+    background-color: #6c5ce7;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #5a4ddf;
+}
+
+.btn-danger {
+    background-color: #d63031;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.modal-content {
+    background-color: #2d2b45;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+}
