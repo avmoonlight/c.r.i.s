@@ -5,6 +5,8 @@
     <title>Atividade Paranormal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/atividade_paranormal.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <nav class="navbar">
@@ -20,6 +22,49 @@
         <div class="card">
             <h2>Relatório de Atividade Paranormal</h2>
             <canvas id="graficoParanormal"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Mapa de Ocorrências</h2>
+            <div id="map" style="height: 400px;"></div>
+        </div>
+
+        <div class="card">
+            <h2>Integridade da Membrana Nacional</h2>
+            <canvas id="graficoMembrana"></canvas>
+        </div>
+    </div>
+
+    <!-- Parallax Section -->
+    <div class="parallax"></div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Membranas Afetadas por Cidades</h2>
+            <canvas id="graficoCidades"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Membranas Afetadas por Países</h2>
+            <canvas id="graficoPaises"></canvas>
+        </div>
+
+        <div class="card">
+            <h2>Tabela de Alertas por Região</h2>
+            <table class="table table-dark table-striped">
+                <thead>
+                    <tr>
+                        <th>Região</th>
+                        <th>Alertas Ativos</th>
+                        <th>Última Atividade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Sudeste</td><td>7</td><td>24/04/2025</td></tr>
+                    <tr><td>Nordeste</td><td>3</td><td>22/04/2025</td></tr>
+                    <tr><td>Centro-Oeste</td><td>5</td><td>23/04/2025</td></tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -42,6 +87,68 @@
                 scales: {
                     y: { beginAtZero: true }
                 }
+            }
+        });
+
+        const mapa = L.map('map').setView([-14.2350, -51.9253], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(mapa);
+
+        L.circle([-23.5505, -46.6333], {
+            color: 'red', fillColor: '#f03', fillOpacity: 0.5, radius: 30000
+        }).addTo(mapa).bindPopup("Ocorrência em São Paulo");
+
+        L.circle([-15.7942, -47.8822], {
+            color: 'blue', fillColor: '#03f', fillOpacity: 0.5, radius: 30000
+        }).addTo(mapa).bindPopup("Ocorrência em Brasília");
+
+        L.circle([-23.4335, -45.0833], {
+            color: 'purple', fillColor: '#800080', fillOpacity: 0.5, radius: 25000
+        }).addTo(mapa).bindPopup("Ocorrência em Ubatuba");
+
+        L.circle([-22.5645, -47.4017], {
+            color: 'orange', fillColor: '#ffa500', fillOpacity: 0.5, radius: 25000
+        }).addTo(mapa).bindPopup("Ocorrência em Limeira");
+
+        const pie = document.getElementById('graficoMembrana');
+        new Chart(pie, {
+            type: 'pie',
+            data: {
+                labels: ['Íntegra', 'Danificada'],
+                datasets: [{
+                    data: [65, 35],
+                    backgroundColor: ['#4caf50', '#f44336']
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('graficoCidades'), {
+            type: 'bar',
+            data: {
+                labels: ['São Paulo', 'Rio de Janeiro', 'Brasília', 'Recife'],
+                datasets: [{
+                    label: 'Membranas Danificadas',
+                    data: [5, 3, 4, 2],
+                    backgroundColor: '#f44336'
+                }]
+            }
+        });
+
+        new Chart(document.getElementById('graficoPaises'), {
+            type: 'bar',
+            data: {
+                labels: ['Brasil', 'Argentina', 'Chile', 'Peru'],
+                datasets: [{
+                    label: 'Membranas Danificadas',
+                    data: [12, 4, 6, 3],
+                    backgroundColor: '#ff9800'
+                }]
             }
         });
     </script>
