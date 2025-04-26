@@ -52,12 +52,13 @@ body, html {
 
 canvas {
     width: 100% !important;
-    height: 300px !important;
+    height: auto;
+    max-height: 400px;
 }
 
 /* Parallax */
 .parallax {
-    background-image: url("../img/img_paralax.jpg"); /* atualize com o nome da sua imagem */
+    background-image: url("../img/parallax_bg.jpg"); /* substitua se necessário */
     min-height: 300px;
     background-attachment: fixed;
     background-position: center;

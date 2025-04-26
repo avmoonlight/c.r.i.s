@@ -112,21 +112,38 @@
         }).addTo(mapa).bindPopup("Ocorrência em Limeira");
 
         const pie = document.getElementById('graficoMembrana');
+pie.height = 400;
         new Chart(pie, {
-            type: 'pie',
-            data: {
-                labels: ['Íntegra', 'Danificada'],
-                datasets: [{
-                    data: [65, 35],
-                    backgroundColor: ['#4caf50', '#f44336']
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { position: 'bottom' }
+    type: 'pie',
+    data: {
+        labels: ['Íntegra', 'Danificada'],
+        datasets: [{
+            data: [65, 35],
+            backgroundColor: ['#ffffff', '#000000'],
+            borderColor: '#e0f7fa',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    color: '#e0f7fa',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
                 }
+            },
+            tooltip: {
+                backgroundColor: '#1e2e2e',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff'
             }
-        });
+        }
+    }
+});
 
         new Chart(document.getElementById('graficoCidades'), {
             type: 'bar',
