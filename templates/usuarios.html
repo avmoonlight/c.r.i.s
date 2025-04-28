@@ -2,96 +2,68 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuários Cadastrados</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/usuarios.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <div class="d-flex">
-        <div class="sidebar bg-primary text-light d-flex flex-column align-items-center p-3">
-            <a href="{{ url_for('dashboard') }}" class="text-light text-decoration-none text-center mb-3">
-                <i class="bi bi-arrow-left-circle fs-1"></i>
-                <h6>DASHBOARD</h6>
-            </a>
-            <i class="bi bi-person-circle fs-1 mb-3"></i>
-            <h6>SUPERUSER</h6>
-            <hr class="text-light w-75">
-            <a href="{{ url_for('usuarios') }}" class="text-light text-decoration-none text-center">
-                <i class="bi bi-people-fill fs-1 mb-1"></i>
-                <h6>USUÁRIOS</h6>
-            </a>
+
+<div class="d-flex">
+    <div class="sidebar">
+        <a href="{{ url_for('dashboard') }}" class="sidebar-link">
+            <i class="bi bi-arrow-left-circle"></i>
+            <span>DASHBOARD</span>
+        </a>
+        <div class="sidebar-user">
+            <i class="bi bi-person-circle"></i>
+            <span>SUPERUSER</span>
         </div>
-
-        <div class="main-content flex-grow-1 p-4">
-            <div class="row g-3">
-                <div class="col-12">
-                    <div class="card p-4 mb-4 shadow-sm">
-                        <h4 class="text-center mb-4">Formulário de Criação de Novo Usuário</h4>
-                        <form method="POST" enctype="multipart/form-data" action="{{ url_for('usuarios') }}" class="row g-3">
-                            <div class="col-md-6">
-                                <label for="username" class="form-label">Nome de Usuário</label>
-                                <input type="text" class="form-control rounded-pill" id="username" name="username" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="senha" class="form-label">Senha</label>
-                                <input type="password" class="form-control rounded-pill" id="senha" name="senha" required>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="imagem" class="form-label">Imagem do Usuário</label>
-                                <input type="file" class="form-control rounded-pill" id="imagem" name="imagem">
-                            </div>
-                            <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary px-5 rounded-pill">Cadastrar Usuário</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="card card-banner mb-4">
-                        <img src="{{ url_for('static', filename='img/img_paralax.jpg') }}" class="card-img" alt="Banner Usuários">
-                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
-                            <h1 class="fw-bold">Usuários Cadastrados</h1>
-                        </div>
-                    </div>
-                </div>
-
-                {% for usuario in usuarios %}
-                <div class="col-md-4">
-                    <div class="card bg-secondary text-light text-center mb-4">
-                        <img src="{{ url_for('static', filename=usuario.imagem or 'uploads/default-user.png') }}" class="card-img-top" alt="Imagem do Usuário">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ usuario.username }}</h5>
-                            <button class="btn btn-outline-light mb-2" data-bs-toggle="modal" data-bs-target="#editarModal{{ usuario.id }}">Editar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Modal Editar -->
-                <div class="modal fade" id="editarModal{{ usuario.id }}" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Confirmar Edição</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                      </div>
-                      <div class="modal-body">
-                        Você deseja editar este usuário?
-                      </div>
-                      <div class="modal-footer">
-                        <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="btn btn-primary">Sim, Editar</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {% endfor %}
-
-            </div>
-        </div>
+        <hr>
+        <a href="{{ url_for('usuarios') }}" class="sidebar-link">
+            <i class="bi bi-people-fill"></i>
+            <span>USUÁRIOS</span>
+        </a>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="main-content">
+        <section class="formulario">
+            <h2>Cadastrar Novo Usuário</h2>
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('usuarios') }}">
+                <input type="text" name="username" placeholder="Nome de Usuário" required>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <input type="file" name="imagem">
+                <button type="submit">Cadastrar Usuário</button>
+            </form>
+        </section>
+
+        <section class="card-banner">
+            <img src="{{ url_for('static', filename='img/img_paralax.jpg') }}" alt="Banner Usuários">
+            <h1>Usuários Cadastrados</h1>
+        </section>
+
+        <section class="cards">
+            {% for usuario in usuarios %}
+            <div class="card">
+                <img src="{{ url_for('static', filename=usuario.imagem or 'uploads/default-user.png') }}" alt="Imagem do Usuário">
+                <h3>{{ usuario.username }}</h3>
+                <button class="btn" onclick="abrirModal('{{ usuario.id }}')">Editar</button>
+
+                <!-- Modal -->
+                <div class="modal" id="modal-{{ usuario.id }}">
+                    <div class="modal-content">
+                        <p>Deseja editar este usuário?</p>
+                        <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="btn btn-confirmar">Sim, Editar</a>
+                        <button type="button" class="btn btn-cancelar" onclick="fecharModal('{{ usuario.id }}')">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
 </body>
 </html>
