@@ -19,48 +19,43 @@
 </header>
 
 <main class="container">
+
     <section class="formulario">
-        <h2>Cadastrar Nova Criatura</h2>
+        <h2>Cadastrar Novo Usuário</h2>
         <form method="POST" enctype="multipart/form-data">
             <input type="text" name="nome" placeholder="Nome" required>
-            <input type="text" name="elemento" placeholder="Elemento">
-            <select name="raridade" required>
-                <option value="">Selecione a raridade</option>
-                <option value="comum">Comum</option>
-                <option value="rara">Rara</option>
-                <option value="muito rara">Muito Rara</option>
-                <option value="relíquia">Relíquia</option>
-            </select>
-            <input type="file" name="imagem">
-            <button type="submit" class="btn">Cadastrar Criatura</button>
+            <input type="password" name="senha" placeholder="Senha" required>
+            <input type="file" name="imagem" accept="image/*">
+            <button type="submit" class="btn">Cadastrar Usuário</button>
         </form>
     </section>
 
     <section class="cards">
-        {% for criatura in criaturas %}
+        {% for usuario in usuarios %}
         <div class="card">
-            <img src="{{ url_for('static', filename=criatura.imagem or 'uploads/default.jpg') }}" alt="Imagem da Criatura" class="avatar">
-            <h3>{{ criatura.nome }}</h3>
-            <p>Elemento: {{ criatura.elemento }}</p>
-            <p>Raridade: {{ criatura.raridade }}</p>
-            <a href="{{ url_for('editar_criatura', id=criatura.id) }}" class="btn">Editar</a>
-            <button class="btn btn-danger" onclick="abrirModal('{{ criatura.id }}')">Deletar</button>
+            <img src="{{ url_for('static', filename=usuario.imagem or 'uploads/default.jpg') }}" alt="Avatar do Usuário" class="avatar">
+            <h3>{{ usuario.nome }}</h3>
+            <!-- Você pode adicionar mais informações aqui se quiser -->
+            <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="btn">Editar</a>
+            <button class="btn btn-danger" onclick="abrirModal('{{ usuario.id }}')">Deletar</button>
 
             <!-- Modal Deletar -->
-            <div class="modal" id="modal-{{ criatura.id }}">
-                <div class="modal-overlay" onclick="fecharModal('{{ criatura.id }}')"></div>
+            <div class="modal" id="modal-{{ usuario.id }}">
+                <div class="modal-overlay" onclick="fecharModal('{{ usuario.id }}')"></div>
                 <div class="modal-content">
-                    <p>Tem certeza que deseja deletar esta criatura?</p>
-                    <form method="POST" action="{{ url_for('deletar_criatura', id=criatura.id) }}">
+                    <p>Tem certeza que deseja deletar este usuário?</p>
+                    <form method="POST" action="{{ url_for('deletar_usuario', id=usuario.id) }}">
                         <button type="submit" class="btn btn-danger">Deletar</button>
-                        <button type="button" class="btn" onclick="fecharModal('{{ criatura.id }}')">Cancelar</button>
+                        <button type="button" class="btn" onclick="fecharModal('{{ usuario.id }}')">Cancelar</button>
                     </form>
                 </div>
             </div>
         </div>
         {% endfor %}
     </section>
+
 </main>
+
 
 <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 </body>
