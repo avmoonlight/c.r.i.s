@@ -151,6 +151,7 @@ def editar_usuario(id):
     return render_template('editar_usuario.html', usuario=user)
 
 # Listar e criar agentes
+# Listar e criar agentes
 @app.route('/agentes', methods=['GET', 'POST'])
 def agentes():
     conn = get_db_connection()
@@ -161,16 +162,18 @@ def agentes():
         sobrenome = request.form.get('sobrenome')
         data_nasc = request.form.get('data_nasc')
         contato = request.form.get('contato_emergencia')
+        elemento = request.form.get('elemento')
+        classe = request.form.get('classe')
         observacoes = request.form.get('observacoes')
-        status = 'vivo' if request.form.get('status') else 'morto'
+        status = request.form.get('status')  # Agora o status vem direto do formulário (radio)
 
         imagem = request.files.get('imagem')
         caminho_relativo = salvar_imagem(imagem)
 
         cursor.execute("""
-            INSERT INTO agentes (nome, sobrenome, data_nasc, contato_emergencia, observacoes, imagem, status)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-        """, (nome, sobrenome, data_nasc, contato, observacoes, caminho_relativo, status))
+            INSERT INTO agentes (nome, sobrenome, data_nasc, contato_emergencia, elemento, classe, observacoes, imagem, status)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (nome, sobrenome, data_nasc, contato, elemento, classe, observacoes, caminho_relativo, status))
         conn.commit()
 
     cursor.execute("SELECT * FROM agentes")
@@ -178,6 +181,8 @@ def agentes():
     conn.close()
     return render_template('agentes.html', agentes=agentes)
 
+
+# Editar agente
 # Editar agente
 @app.route('/editar/<int:id>', methods=['GET', 'POST'])
 def editar(id):
@@ -189,8 +194,10 @@ def editar(id):
         sobrenome = request.form.get('sobrenome')
         data_nasc = request.form.get('data_nasc')
         contato = request.form.get('contato_emergencia')
+        elemento = request.form.get('elemento')
+        classe = request.form.get('classe')
         observacoes = request.form.get('observacoes')
-        status = 'vivo' if request.form.get('status') else 'morto'
+        status = request.form.get('status')  # Pega o status direto do formulário
 
         imagem = request.files.get('imagem')
         if imagem and imagem.filename:
@@ -202,9 +209,10 @@ def editar(id):
 
         cursor.execute("""
             UPDATE agentes
-            SET nome = %s, sobrenome = %s, data_nasc = %s, contato_emergencia = %s, observacoes = %s, imagem = %s, status = %s
+            SET nome = %s, sobrenome = %s, data_nasc = %s, contato_emergencia = %s, elemento = %s,
+                classe = %s, observacoes = %s, imagem = %s, status = %s
             WHERE id = %s
-        """, (nome, sobrenome, data_nasc, contato, observacoes, caminho_relativo, status, id))
+        """, (nome, sobrenome, data_nasc, contato, elemento, classe, observacoes, caminho_relativo, status, id))
         conn.commit()
         conn.close()
         return redirect(url_for('agentes'))
@@ -213,6 +221,7 @@ def editar(id):
     agente = cursor.fetchone()
     conn.close()
     return render_template('editar.html', agente=agente)
+
 
 # Deletar agente
 @app.route('/deletar/<int:id>', methods=['GET', 'POST'])
