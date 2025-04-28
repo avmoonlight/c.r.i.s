@@ -1,144 +1,59 @@
-<!-- Template base para AGENTES -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/agentes.css') }}" rel="stylesheet">
-    <style>
-        .card-img-top.rounded-avatar {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #00e5ff;
-            background-color: #0e1a1a;
-            margin: 0 auto 1rem auto;
-            display: block;
-            position: relative;
-            top: -40px;
-        }
-        .card-body h5 {
-            margin-top: 0.5rem;
-        }
-        .card {
-            transition: none !important;
-        }
-    </style>
 </head>
-<body class="bg-dark text-light">
+<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">C.R.I.S</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" href="{{ url_for('agentes') }}">Agentes</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('criaturas') }}">Bestiário</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('itens') }}">Itens Paranormais</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header class="header">
+    <h1 class="logo">C.R.I.S</h1>
+    <nav class="menu">
+        <a href="{{ url_for('agentes') }}">Agentes</a>
+        <a href="{{ url_for('criaturas') }}">Bestiário</a>
+        <a href="{{ url_for('itens') }}">Itens Paranormais</a>
+        <a href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a>
+    </nav>
+</header>
 
-<div class="container py-5">
-    <h1 class="text-center mb-5">Agentes</h1>
-
-    <div class="card p-4 mb-5 bg-secondary text-light">
-        <h4 class="mb-4">Cadastrar Novo Agente</h4>
+<main class="container">
+    <section class="formulario">
+        <h2>Formulário</h2>
         <form method="POST" enctype="multipart/form-data">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="sobrenome" class="form-label">Sobrenome</label>
-                    <input type="text" class="form-control" id="sobrenome" name="sobrenome">
-                </div>
-                <div class="col-md-6">
-                    <label for="data_nasc" class="form-label">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="data_nasc" name="data_nasc">
-                </div>
-                <div class="col-md-6">
-                    <label for="contato_emergencia" class="form-label">Contato de Emergência</label>
-                    <input type="text" class="form-control" id="contato_emergencia" name="contato_emergencia">
-                </div>
-                <div class="col-md-6">
-                    <label for="elemento" class="form-label">Elemento</label>
-                    <input type="text" class="form-control" id="elemento" name="elemento">
-                </div>
-                <div class="col-md-6">
-                    <label for="classe" class="form-label">Classe</label>
-                    <input type="text" class="form-control" id="classe" name="classe">
-                </div>
-                <div class="col-12">
-                    <label for="observacoes" class="form-label">Observações</label>
-                    <textarea class="form-control" id="observacoes" name="observacoes" rows="2"></textarea>
-                </div>
-                <div class="col-md-6">
-                    <label for="status" class="form-label">Status</label>
-                    <select class="form-select" id="status" name="status">
-                        <option value="vivo">Vivo</option>
-                        <option value="morto">Morto</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="imagem" class="form-label">Imagem</label>
-                    <input type="file" class="form-control" id="imagem" name="imagem">
-                </div>
-                <div class="col-12 text-center mt-3">
-                    <button type="submit" class="btn btn-primary px-5">Cadastrar Agente</button>
-                </div>
-            </div>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="sobrenome" placeholder="Sobrenome">
+            <input type="date" name="data_nasc" placeholder="Data de Nascimento">
+            <input type="text" name="contato_emergencia" placeholder="Contato de Emergência">
+            <input type="text" name="elemento" placeholder="Elemento">
+            <input type="text" name="classe" placeholder="Classe">
+            <textarea name="observacoes" placeholder="Observações"></textarea>
+            <select name="status">
+                <option value="vivo">Vivo</option>
+                <option value="morto">Morto</option>
+            </select>
+            <input type="file" name="imagem">
+            <button type="submit">Cadastrar Agente</button>
         </form>
-    </div>
+    </section>
 
-    <div class="row g-4">
+    <section class="cards">
         {% for agente in agentes %}
-        <div class="col-md-4">
-            <div class="card bg-secondary text-light text-center p-3">
-                <img src="{{ url_for('static', filename=agente.imagem or 'uploads/default.jpg') }}" class="card-img-top rounded-avatar" alt="Imagem do Agente">
-                <div class="card-body">
-                    <h5 class="card-title">{{ agente.nome }} {{ agente.sobrenome }}</h5>
-                    <p class="card-text">
-                        Elemento: {{ agente.elemento }}<br>
-                        Classe: {{ agente.classe }}<br>
-                        Status: {{ agente.status }}
-                    </p>
-                    <a href="{{ url_for('editar', id=agente.id) }}" class="btn btn-primary mb-2">Editar</a>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletarModal{{ agente.id }}">Deletar</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Deletar -->
-        <div class="modal fade" id="deletarModal{{ agente.id }}" tabindex="-1" aria-labelledby="deletarModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Confirmar Deleção</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-              </div>
-              <div class="modal-body">
-                Tem certeza que deseja deletar este agente?
-              </div>
-              <div class="modal-footer">
-                <form method="POST" action="{{ url_for('deletar', id=agente.id) }}">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Deletar</button>
-                </form>
-              </div>
-            </div>
-          </div>
+        <div class="card">
+            <img src="{{ url_for('static', filename=agente.imagem or 'uploads/default.jpg') }}" alt="Imagem do Agente" class="avatar">
+            <h3>{{ agente.nome }} {{ agente.sobrenome }}</h3>
+            <p>Elemento: {{ agente.elemento }}</p>
+            <p>Classe: {{ agente.classe }}</p>
+            <p>Status: {{ agente.status }}</p>
+            <a href="{{ url_for('editar', id=agente.id) }}" class="btn">Editar</a>
+            <form method="POST" action="{{ url_for('deletar', id=agente.id) }}">
+                <button type="submit" class="btn btn-danger">Deletar</button>
+            </form>
         </div>
         {% endfor %}
-    </div>
-</div>
+    </section>
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
