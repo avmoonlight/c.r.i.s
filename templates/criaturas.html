@@ -48,6 +48,7 @@
 
             <!-- Modal Deletar -->
             <div class="modal" id="modal-{{ criatura.id }}">
+                <div class="modal-overlay" onclick="fecharModal('{{ criatura.id }}')"></div>
                 <div class="modal-content">
                     <p>Tem certeza que deseja deletar esta criatura?</p>
                     <form method="POST" action="{{ url_for('deletar_criatura', id=criatura.id) }}">

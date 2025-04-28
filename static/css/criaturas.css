@@ -169,3 +169,34 @@ body {
 .btn-danger:hover {
     background-color: #b52a37;
 }
+
+.modal {
+    display: none; /* escondida inicialmente */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* fundo escuro */
+    top: 0;
+    left: 0;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #a7a4ad;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    z-index: 1001;
+}
