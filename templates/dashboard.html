@@ -8,18 +8,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="dashboard">
-        <aside class="sidebar">
-            <div class="profile">
-                <div class="profile-icon">👤</div>
-                <h6>SUPERUSER</h6>
-            </div>
-            <hr>
-            <div class="nav-link">
-                <div class="nav-icon">👥</div>
-                <h6>USUÁRIOS</h6>
-            </div>
-        </aside>
+    <aside class="sidebar">
+        <div class="profile">
+            <div class="profile-icon">👤</div>
+            <h6>SUPERUSER</h6>
+        </div>
+        <hr>
+        <a href="{{ url_for('usuarios') }}" class="nav-link">
+            <div class="nav-icon">👥</div>
+            <h6>USUÁRIOS</h6>
+        </a>
+    </aside>
+    
+    
+    
 
         <main class="main-content">
             <div class="banner">
