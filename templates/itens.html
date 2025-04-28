@@ -43,14 +43,16 @@
             <p>Raridade: {{ item.raridade }}</p>
             <p>Efeito: {{ item.efeito }}</p>
             <a href="{{ url_for('editar_item', id=item.id) }}" class="btn">Editar</a>
-            <button class="btn btn-danger" onclick="abrirModal({{ item.id }})">Deletar</button>
+            <button class="btn btn-danger" onclick="abrirModal('{{ item.id }}')">Deletar</button>
+
 
             <div class="modal" id="modal-{{ item.id }}">
                 <div class="modal-content">
                     <p>Tem certeza que deseja deletar este item?</p>
                     <form method="POST" action="{{ url_for('deletar_item', id=item.id) }}">
                         <button type="submit" class="btn btn-danger">Deletar</button>
-                        <button type="button" class="btn" onclick="fecharModal({{ item.id }})">Cancelar</button>
+                        <button class="btn btn-danger" onclick="abrirModal('{{ item.id }}')">Deletar</button>
+
                     </form>
                 </div>
             </div>
