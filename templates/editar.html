@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <title>Editar Agente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar-agente.css') }}">
 </head>
 <body>
     <div class="container my-5">
-        <div class="card shadow-lg p-4 bg-dark text-light rounded">
-            <div class="text-center mb-4">
+        <div class="profile-card">
+            <div class="profile-header">
                 <h2>Editar Agente</h2>
-            </div>
-            <form method="POST" enctype="multipart/form-data" id="form-editar">
-                <div class="mb-3 text-center">
+                <div class="text-center mb-3">
                     {% if agente.imagem %}
-                        <img src="{{ url_for('static', filename=agente.imagem) }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
+                        <img src="{{ url_for('static', filename=agente.imagem) }}" alt="Avatar" class="profile-avatar">
                     {% else %}
-                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
+                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="profile-avatar">
                     {% endif %}
                 </div>
+            </div>
+            <form method="POST" enctype="multipart/form-data" id="form-editar">
                 <div class="mb-3">
                     <input type="file" name="imagem" id="imagem" class="form-control">
                 </div>
