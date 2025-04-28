@@ -1,105 +1,66 @@
-<!-- Template para ITENS PARANORMAIS -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Itens Paranormais</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/itens.css') }}" rel="stylesheet">
 </head>
-<body class="bg-dark text-light">
+<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">C.R.I.S</a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('agentes') }}">Agentes</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('criaturas') }}">Bestiário</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{{ url_for('itens') }}">Itens Paranormais</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header class="header">
+    <h1 class="logo">C.R.I.S</h1>
+    <nav class="menu">
+        <a href="{{ url_for('agentes') }}">Agentes</a>
+        <a href="{{ url_for('criaturas') }}">Bestiário</a>
+        <a href="{{ url_for('itens') }}">Itens Paranormais</a>
+        <a href="{{ url_for('atividade_paranormal') }}">Atividade Paranormal</a>
+    </nav>
+</header>
 
-<div class="container py-5">
-    <h1 class="text-center mb-5">Itens Paranormais</h1>
-
-    <div class="card p-4 mb-5 bg-secondary text-light">
-        <h4 class="mb-4">Cadastrar Novo Item Paranormal</h4>
+<main class="container">
+    <section class="formulario">
+        <h2>Cadastrar Novo Item Paranormal</h2>
         <form method="POST">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="elemento" class="form-label">Elemento</label>
-                    <input type="text" class="form-control" id="elemento" name="elemento">
-                </div>
-                <div class="col-md-6">
-                    <label for="raridade" class="form-label">Raridade</label>
-                    <select class="form-select" id="raridade" name="raridade">
-                        <option value="comum">Comum</option>
-                        <option value="rara">Rara</option>
-                        <option value="muito rara">Muito Rara</option>
-                        <option value="relíquia">Relíquia</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="efeito" class="form-label">Efeito</label>
-                    <input type="text" class="form-control" id="efeito" name="efeito">
-                </div>
-                <div class="col-12 text-center mt-3">
-                    <button type="submit" class="btn btn-primary px-5">Cadastrar Item</button>
-                </div>
-            </div>
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="elemento" placeholder="Elemento">
+            <select name="raridade">
+                <option value="comum">Comum</option>
+                <option value="rara">Rara</option>
+                <option value="muito rara">Muito Rara</option>
+                <option value="relíquia">Relíquia</option>
+            </select>
+            <input type="text" name="efeito" placeholder="Efeito">
+            <button type="submit">Cadastrar Item</button>
         </form>
-    </div>
+    </section>
 
-    <div class="row g-4">
+    <section class="cards">
         {% for item in itens %}
-        <div class="col-md-4">
-            <div class="card bg-secondary text-light">
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ item.nome }}</h5>
-                    <p class="card-text">
-                        Elemento: {{ item.elemento }}<br>
-                        Raridade: {{ item.raridade }}<br>
-                        Efeito: {{ item.efeito }}
-                    </p>
-                    <a href="{{ url_for('editar_item', id=item.id) }}" class="btn btn-primary mb-2">Editar</a>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletarModal{{ item.id }}">Deletar</button>
+        <div class="card">
+            <h3>{{ item.nome }}</h3>
+            <p>Elemento: {{ item.elemento }}</p>
+            <p>Raridade: {{ item.raridade }}</p>
+            <p>Efeito: {{ item.efeito }}</p>
+            <a href="{{ url_for('editar_item', id=item.id) }}" class="btn">Editar</a>
+            <button class="btn btn-danger" onclick="abrirModal({{ item.id }})">Deletar</button>
+
+            <div class="modal" id="modal-{{ item.id }}">
+                <div class="modal-content">
+                    <p>Tem certeza que deseja deletar este item?</p>
+                    <form method="POST" action="{{ url_for('deletar_item', id=item.id) }}">
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                        <button type="button" class="btn" onclick="fecharModal({{ item.id }})">Cancelar</button>
+                    </form>
                 </div>
             </div>
-        </div>
-
-        <!-- Modal Deletar -->
-        <div class="modal fade" id="deletarModal{{ item.id }}" tabindex="-1" aria-labelledby="deletarModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Confirmar Deleção</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-              </div>
-              <div class="modal-body">
-                Tem certeza que deseja deletar este item?
-              </div>
-              <div class="modal-footer">
-                <form method="POST" action="{{ url_for('deletar_item', id=item.id) }}">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-danger">Deletar</button>
-                </form>
-              </div>
-            </div>
-          </div>
         </div>
         {% endfor %}
-    </div>
-</div>
+    </section>
+</main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JS da Modal -->
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
 </body>
 </html>
