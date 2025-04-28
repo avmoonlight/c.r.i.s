@@ -116,7 +116,6 @@ def deletar_usuario(id):
 
     return redirect(url_for('usuarios'))
 
-
 # Editar usuário
 @app.route('/usuarios/editar/<int:id>', methods=['GET', 'POST'])
 def editar_usuario(id):
@@ -150,7 +149,6 @@ def editar_usuario(id):
     user = cursor.fetchone()
     conn.close()
     return render_template('editar_usuario.html', usuario=user)
-
 
 # Listar e criar agentes
 @app.route('/agentes', methods=['GET', 'POST'])
@@ -216,7 +214,7 @@ def editar(id):
     conn.close()
     return render_template('editar.html', agente=agente)
 
-# Deletar agente (confirmação via GET e exclusão via POST)
+# Deletar agente
 @app.route('/deletar/<int:id>', methods=['GET', 'POST'])
 def deletar(id):
     conn = get_db_connection()
@@ -233,8 +231,8 @@ def deletar(id):
         conn.commit()
         conn.close()
         return redirect(url_for('agentes'))
-    
-# Rotas para Criaturas (Bestiário)
+
+# Rotas para Criaturas
 @app.route('/criaturas', methods=['GET', 'POST'])
 def criaturas():
     conn = get_db_connection()
@@ -305,7 +303,6 @@ def deletar_criatura(id):
     conn.close()
     return render_template('confirmar_deletar_criatura.html', criatura=criatura)
 
-
 # Rotas para Itens Paranormais
 @app.route('/itens', methods=['GET', 'POST'])
 def itens():
@@ -317,11 +314,13 @@ def itens():
         elemento = request.form.get('elemento')
         efeito = request.form.get('efeito')
         raridade = request.form.get('raridade')
+        imagem = request.files.get('imagem')
+        imagem_path = salvar_imagem(imagem)
 
         cursor.execute("""
-            INSERT INTO itens_paranormais (nome, elemento, efeito, raridade)
-            VALUES (%s, %s, %s, %s)
-        """, (nome, elemento, efeito, raridade))
+            INSERT INTO itens_paranormais (nome, elemento, efeito, raridade, imagem)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (nome, elemento, efeito, raridade, imagem_path))
         conn.commit()
 
     cursor.execute("SELECT * FROM itens_paranormais")
@@ -339,12 +338,19 @@ def editar_item(id):
         elemento = request.form.get('elemento')
         efeito = request.form.get('efeito')
         raridade = request.form.get('raridade')
+        imagem = request.files.get('imagem')
+
+        if imagem and imagem.filename:
+            imagem_path = salvar_imagem(imagem)
+        else:
+            cursor.execute("SELECT imagem FROM itens_paranormais WHERE id = %s", (id,))
+            imagem_path = cursor.fetchone()['imagem']
 
         cursor.execute("""
             UPDATE itens_paranormais
-            SET nome = %s, elemento = %s, efeito = %s, raridade = %s
+            SET nome = %s, elemento = %s, efeito = %s, raridade = %s, imagem = %s
             WHERE id = %s
-        """, (nome, elemento, efeito, raridade, id))
+        """, (nome, elemento, efeito, raridade, imagem_path, id))
         conn.commit()
         conn.close()
         return redirect(url_for('itens'))
@@ -376,8 +382,6 @@ def atividade_paranormal():
     if 'usuario' not in session:
         return redirect(url_for('login'))
     return render_template('atividade_paranormal.html')
-
-
 
 # Logout
 @app.route('/logout')
