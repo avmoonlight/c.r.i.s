@@ -3,53 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="d-flex">
-        <div class="sidebar bg-primary text-light d-flex flex-column align-items-center p-3">
-            <i class="bi bi-person-circle fs-1 mb-3"></i>
-            <h6>SUPERUSER</h6>
-            <hr class="text-light w-75">
-            <a href="{{ url_for('usuarios') }}" class="text-light text-decoration-none text-center">
-                <i class="bi bi-people-fill fs-1 mb-1"></i>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="profile">
+                <div class="profile-icon">👤</div>
+                <h6>SUPERUSER</h6>
+            </div>
+            <hr>
+            <div class="nav-link">
+                <div class="nav-icon">👥</div>
                 <h6>USUÁRIOS</h6>
-            </a>
-        </div>
+            </div>
+        </aside>
 
-        <div class="main-content flex-grow-1 p-4">
-            <div class="row g-3">
-                <div class="col-12">
-                    <div class="card card-banner">
-                        <img src="{{ url_for('static', filename='img/img.jpg') }}" class="card-img" alt="Banner">
-                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
-                            <h1 class="fw-bold">DASHBOARD</h1>
-                        </div>
-                    </div>
+        <main class="main-content">
+            <div class="banner">
+                <img src="static/img/img.jpg" alt="Banner">
+                <div class="banner-text">
+                    <h1>DASHBOARD</h1>
                 </div>
-                <div class="col-md-6">
-                    <div class="card p-4 bg-light text-dark h-100">
-                        <canvas id="graficoMembrana"></canvas>
-                    </div>
+            </div>
+
+            <div class="row">
+                <div class="card grafico">
+                    <canvas id="graficoMembrana"></canvas>
                 </div>
-                <div class="col-md-6">
-                    <div class="card p-4 bg-primary text-light h-100">
-                        <p class="text-center">A membrana próxima a ordem está estável</p>
+
+                <div class="card missoes">
+                    <div class="missao">
+                        <img src="static/img/img_missao_concluida.png" alt="Missão concluída">
+                        <span>Missão concluída</span>
                     </div>
-                </div>
-                <div class="col-12">
-                    <div class="card p-4 text-light h-100 bg-ameaca">
-                        <p class="text-center fw-bold">SEM AMEAÇA DE ATAQUE A BASE</p>
+                    <div class="missao">
+                        <span>Viram o diabo<br>dnv</span>
+                        <img src="static/img/img_viram_o_diabo.png" alt="Viram o diabo dnv">
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-4">
-                <a href="{{ url_for('agentes') }}" class="btn btn-outline-light">Ir para Área CRIS</a>
+
+            <div class="card ameaca">
+                <p>SEM AMEAÇA DE ATAQUE A BASE</p>
             </div>
-        </div>
+
+            <div class="botao">
+                <a href="#">Ir para Área CRIS</a>
+            </div>
+        </main>
     </div>
 
     <script>
@@ -74,6 +78,5 @@
             }
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
