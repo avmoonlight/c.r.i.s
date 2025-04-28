@@ -1,4 +1,4 @@
-/* Reset básico */
+/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -6,148 +6,160 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
+    font-family: Arial, sans-serif;
+    background-color: #2e2b36;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Header */
+/* HEADER */
 .header {
+    background-color: #6e6d73;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f;
-    padding: 1rem 2rem;
-    border-bottom: 2px solid #292929;
 }
 
 .logo {
-    font-size: 1.8rem;
+    color: #7d3cff;
+    font-size: 28px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .menu {
     display: flex;
-    gap: 2rem;
+    gap: 20px;
 }
 
 .menu a {
     color: #ffffff;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background 0.3s;
 }
 
-.menu a:hover,
-.menu a.active {
-    background-color: #007bff;
+.menu a:hover {
+    background-color: #7d3cff;
 }
 
-/* Container Principal */
+/* CONTAINER */
 .container {
-    padding: 2rem;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
 }
 
-/* Formulário de Cadastro */
+/* FORMULÁRIO */
 .formulario {
-    background-color: #1f1f1f;
-    padding: 2rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    border: 1px solid #292929;
+    background-color: #a7a4ad;
+    padding: 30px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 .formulario h2 {
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #2e2b36;
 }
 
 .formulario form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 15px;
 }
 
-input[type="text"],
-input[type="file"],
-select {
-    padding: 0.7rem;
-    background-color: #2a2a2a;
-    border: 1px solid #444;
-    border-radius: 5px;
-    color: #ffffff;
-}
-
-input[type="text"]::placeholder {
-    color: #888888;
-}
-
-button[type="submit"] {
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 0.7rem;
+.formulario input,
+.formulario select,
+.formulario textarea {
+    width: 100%;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #e0dde5;
+    color: #2e2b36;
+    font-size: 14px;
+}
+
+.formulario button {
+    background-color: #7d3cff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background 0.3s;
 }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
+.formulario button:hover {
+    background-color: #5b2bbf;
 }
 
-/* Cards das Criaturas */
+/* CARDS */
 .cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
 }
 
 .card {
-    background-color: #1f1f1f;
-    padding: 1.5rem;
-    border-radius: 10px;
+    background-color: #a7a4ad;
+    padding: 20px;
+    border-radius: 20px;
+    width: 240px;
     text-align: center;
-    border: 1px solid #292929;
-    position: relative;
+    transition: transform 0.3s;
 }
 
-.card-img {
-    width: 100%;
-    height: 200px;
+.card:hover {
+    transform: scale(1.05);
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
+    background-color: white;
 }
 
 .card h3 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #2e2b36;
 }
 
-.card p {
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    color: #cccccc;
-}
-
-/* Botões */
+/* BOTÕES */
 .btn {
     display: inline-block;
-    padding: 0.6rem 1.5rem;
-    margin-top: 0.5rem;
-    text-decoration: none;
+    margin-top: 10px;
+    padding: 8px 20px;
+    background-color: #7d3cff;
+    color: white;
+    border: none;
+    border-radius: 8px;
     font-weight: bold;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #ffffff;
-    transition: background-color 0.3s;
     cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #5b2bbf;
 }
 
 .btn-danger {
@@ -155,29 +167,5 @@ button[type="submit"]:hover {
 }
 
 .btn-danger:hover {
-    background-color: #a71d2a;
-}
-
-/* Modal */
-.modal {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #1f1f1f;
-    padding: 2rem;
-    border-radius: 8px;
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    border: 1px solid #292929;
+    background-color: #b52a37;
 }

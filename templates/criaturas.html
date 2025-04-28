@@ -32,20 +32,19 @@
                 <option value="relíquia">Relíquia</option>
             </select>
             <input type="file" name="imagem">
-            <button type="submit">Cadastrar Criatura</button>
+            <button type="submit" class="btn">Cadastrar Criatura</button>
         </form>
     </section>
 
     <section class="cards">
         {% for criatura in criaturas %}
         <div class="card">
-            <img src="{{ url_for('static', filename=criatura.imagem or 'uploads/default.jpg') }}" alt="Imagem da Criatura" class="card-img">
+            <img src="{{ url_for('static', filename=criatura.imagem or 'uploads/default.jpg') }}" alt="Imagem da Criatura" class="avatar">
             <h3>{{ criatura.nome }}</h3>
             <p>Elemento: {{ criatura.elemento }}</p>
             <p>Raridade: {{ criatura.raridade }}</p>
             <a href="{{ url_for('editar_criatura', id=criatura.id) }}" class="btn">Editar</a>
-            <button onclick="abrirModal('{{ criatura.id }}')">Deletar</button>
-
+            <button class="btn btn-danger" onclick="abrirModal('{{ criatura.id }}')">Deletar</button>
 
             <!-- Modal Deletar -->
             <div class="modal" id="modal-{{ criatura.id }}">
