@@ -2,46 +2,66 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Criatura</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/editar_criatura.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div class="container my-5">
-        <div class="card shadow-lg p-4 bg-dark text-light rounded">
-            <div class="text-center mb-4">
-                <h2>Editar Criatura</h2>
-            </div>
-            <form method="POST" enctype="multipart/form-data" id="form-editar">
-                <div class="mb-3 text-center">
-                    {% if criatura.imagem %}
-                        <img src="{{ url_for('static', filename=criatura.imagem) }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
-                    {% else %}
-                        <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="rounded-circle" style="width:150px; height:150px; object-fit:cover;">
-                    {% endif %}
-                </div>
-                <div class="mb-3">
-                    <input type="file" name="imagem" id="imagem" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome:</label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="{{ criatura.nome }}" required>
-                </div>
-                <div class="mb-3">
-                    <label for="elemento" class="form-label">Elemento:</label>
-                    <input type="text" class="form-control" id="elemento" name="elemento" value="{{ criatura.elemento }}" required>
-                </div>
-                <div class="mb-4">
-                    <label for="raridade" class="form-label">Raridade:</label>
-                    <input type="text" class="form-control" id="raridade" name="raridade" value="{{ criatura.raridade }}" required>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary px-5">Salvar Alterações</button>
-                    <a href="{{ url_for('criaturas') }}" class="btn btn-secondary ms-3">Cancelar</a>
-                </div>
-            </form>
+
+<div class="container">
+
+    <!-- Sidebar com Avatar -->
+    <div class="sidebar">
+        <div class="avatar-section">
+            {% if criatura.imagem %}
+                <img src="{{ url_for('static', filename=criatura.imagem) }}" alt="Avatar" class="profile-avatar">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/default-user.png') }}" alt="Avatar" class="profile-avatar">
+            {% endif %}
+            <div class="agent-name">{{ criatura.nome }}</div>
         </div>
+
+        <ul class="menu">
+            <li class="menu-item">
+                <a href="{{ url_for('criaturas') }}">Voltar ao Bestiário</a>
+            </li>
+        </ul>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Área de conteúdo -->
+    <div class="content">
+        <h2>Editar Criatura</h2>
+        <form method="POST" enctype="multipart/form-data" id="form-editar">
+
+            <div class="form-group">
+                <label for="imagem">Alterar Imagem:</label>
+                <input type="file" name="imagem" id="imagem">
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value="{{ criatura.nome }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="elemento">Elemento:</label>
+                <input type="text" id="elemento" name="elemento" value="{{ criatura.elemento }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="raridade">Raridade:</label>
+                <input type="text" id="raridade" name="raridade" value="{{ criatura.raridade }}" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Salvar</button>
+                <a href="{{ url_for('criaturas') }}" class="btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
 </body>
 </html>
