@@ -51,7 +51,8 @@
                     <p>Tem certeza que deseja deletar este item?</p>
                     <form method="POST" action="{{ url_for('deletar_item', id=item.id) }}">
                         <button type="submit" class="btn btn-danger">Deletar</button>
-                        <button class="btn btn-danger" onclick="abrirModal('{{ item.id }}')">Deletar</button>
+                        <button type="button" class="btn" onclick="fecharModal('{{ item.id }}')">Cancelar</button>
+
 
                     </form>
                 </div>
