@@ -27,12 +27,23 @@
             <input type="date" name="data_nasc" placeholder="Data de Nascimento">
             <input type="text" name="contato_emergencia" placeholder="Contato de Emergência">
             <input type="text" name="elemento" placeholder="Elemento">
-            <input type="text" name="classe" placeholder="Classe">
-            <textarea name="observacoes" placeholder="Observações"></textarea>
-            <select name="status">
-                <option value="vivo">Vivo</option>
-                <option value="morto">Morto</option>
+
+            <select name="classe" required>
+                <option value="" disabled selected>Selecione a classe</option>
+                <option value="especialista">Especialista</option>
+                <option value="combatente">Combatente</option>
+                <option value="ocultista">Ocultista</option>
+                <option value="sobrevivente">Sobrevivente</option>
             </select>
+
+            <textarea name="observacoes" placeholder="Observações"></textarea>
+
+            <label>Status</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="statusSwitch" name="status" value="vivo"  checked>
+                        <label class="form-check-label" for="statusSwitch">Vivo</label>
+                    </div>
+
             <input type="file" name="imagem">
             <button type="submit">Cadastrar Agente</button>
         </form>
@@ -41,13 +52,13 @@
     <section class="cards">
         {% for agente in agentes %}
         <div class="card">
-            <img src="{{ url_for('static', filename=agente.imagem or 'uploads/default.jpg') }}" alt="Imagem do Agente" class="avatar">
+            <img src="{{ url_for('static', filename=agente.imagem if agente.imagem else 'uploads/default.jpg') }}" alt="Imagem do Agente" class="avatar">
             <h3>{{ agente.nome }} {{ agente.sobrenome }}</h3>
             <p>Elemento: {{ agente.elemento }}</p>
             <p>Classe: {{ agente.classe }}</p>
             <p>Status: {{ agente.status }}</p>
             <a href="{{ url_for('editar', id=agente.id) }}" class="btn">Editar</a>
-            <form method="POST" action="{{ url_for('deletar', id=agente.id) }}">
+            <form method="POST" action="{{ url_for('deletar', id=agente.id) }}" style="display:inline;">
                 <button type="submit" class="btn btn-danger">Deletar</button>
             </form>
         </div>
